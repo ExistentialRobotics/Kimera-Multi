@@ -1,0 +1,2 @@
+put the yaml files in `roscd kimera_vio/params/RealSenseIR`
+and the launch file in `roscd kimera_vio_ros/launch/`
