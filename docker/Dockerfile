@@ -79,6 +79,9 @@ RUN gdown 'https://drive.google.com/uc?export=download&confirm=9iBg&id=1N4y0HbgA
 RUN unzip -f vocab.zip
 
 WORKDIR /root
-
+COPY "./copy/ERL" catkin_ws/src/kimera_vio/params/ERL
+COPY "./copy/cam_info_yamlizer.launch" catkin_ws/src/kimera_ros/launch/
+COPY "./copy/camera_info_yamlizer_node.py" catkin_ws/src/kimera_ros/scipts/
+COPY "./copy/kimera_vio_ros_erl.launch" catkin_ws/src/kimera_ros/launch/
 COPY "./copy/entrypoint.bash" /
 ENTRYPOINT ["/entrypoint.bash"]

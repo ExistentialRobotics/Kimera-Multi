@@ -1,5 +1,5 @@
 <launch>
-  <arg name="dataset_name" value="RealSenseIR"/>
+  <arg name="dataset_name" value="ERL"/>
 
   <!-- allow for different sensor calibrations -->
   <arg name="sensor_config_path" default="$(find kimera_vio)/params"/>
