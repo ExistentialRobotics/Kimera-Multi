@@ -4,3 +4,4 @@
 # But not these files...
 !.gitignore
 !1014-example-docker.yaml
+!erl_cam_params/*
