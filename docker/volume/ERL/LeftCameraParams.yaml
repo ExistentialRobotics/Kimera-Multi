@@ -1,0 +1,14 @@
+%YAML 1.0
+---
+T_BS:
+  cols: 4
+  data: [1.0, 0.0, 0.0, -0.030220000073313713, 0.0, 1.0, 0.0, 0.007400000002235202,
+    0.0, 0.0, 1.0, 0.016019999980926514, 0.0, 0.0, 0.0, 1.0]
+  rows: 4
+camera_id: left_cam
+camera_model: pinhole
+distortion_coefficients: [0.0, 0.0, 0.0, 0.0, 0.0]
+distortion_model: plumb_bob
+intrinsics: [388.96160888671875, 388.96160888671875, 324.7631530761719, 242.99649047851562]
+rate_hz: 0.0
+resolution: [640, 480]

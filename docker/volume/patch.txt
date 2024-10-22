@@ -1,0 +1,4 @@
+cp -r ERL ~/catkin_ws/src/kimera_vio/params/
+cp kimera_vio_ros_erl.launch ~/catkin_ws/src/kimera_ros/launch/
+cp camera_info_yamlizer_node.py ~/catkin_ws/src/kimera_ros/scripts/camera_info_yamlizer_node.py
+cp camera_info_yamlizer.launch ~/catkin_ws/src/kimera_ros/launch/
