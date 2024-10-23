@@ -35,6 +35,10 @@
   <arg name="left_cam_topic"  value="/jackal1/camera/infra1/image_rect_raw"/>
   <arg name="right_cam_topic" value="/jackal1/camera/infra2/image_rect_raw"/>
   <arg name="imu_topic"       value="/jackal1/camera/imu"/>
+  
+  <!-- External Odom -->
+  <arg name="use_external_odom" value="true"/>
+  <arg name="external_odom_topic" value="/jackal1/jackal_velocity_controller/odom"/>
 
   <!-- Launch actual pipeline -->
   <include file="$(find kimera_vio_ros)/launch/kimera_vio_ros.launch"
