@@ -1,14 +1,14 @@
 <launch>
-  <arg name="dataset_name" default="RealSenseIR"/>
+  <arg name="dataset_name" default="ERL"/>
 
   <!-- Frame IDs -->
-  <arg name="base_link_frame_id" value="jackal1/camera_imu_optical_frame"/>
-  <arg name="left_cam_frame_id"  value="jackal1/camera_infra1_optical_frame"/>
-  <arg name="right_cam_frame_id" value="jackal1/camera_infra2_optical_frame"/>
-  <arg name="imu_frame_id" value="jackal1/camera_imu_optical_frame"/>
+  <arg name="base_link_frame_id" value="$(optenv ROBOT_NAMESPACE)/camera_imu_optical_frame"/>
+  <arg name="left_cam_frame_id"  value="$(optenv ROBOT_NAMESPACE)/camera_infra1_optical_frame"/>
+  <arg name="right_cam_frame_id" value="$(optenv ROBOT_NAMESPACE)/camera_infra2_optical_frame"/>
+  <arg name="imu_frame_id" value="$(optenv ROBOT_NAMESPACE)/camera_imu_optical_frame"/>
   <!-- ROS Topics -->
-  <arg name="left_cam_info_topic"  value="/jackal1/camera/infra1/camera_info"/>
-  <arg name="right_cam_info_topic" value="/jackal1/camera/infra2/camera_info"/>
+  <arg name="left_cam_info_topic"  value="/$(optenv ROBOT_NAMESPACE)/camera/infra1/camera_info"/>
+  <arg name="right_cam_info_topic" value="/$(optenv ROBOT_NAMESPACE)/camera/infra2/camera_info"/>
 
   <node pkg="kimera_vio_ros" type="camera_info_yamlizer_node.py"
         name="cam_info_yamelizer" output="screen">

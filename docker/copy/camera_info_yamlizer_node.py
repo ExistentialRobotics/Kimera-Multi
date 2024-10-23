@@ -61,7 +61,7 @@ class CameraInfoYamlizerNode:
         self.imu_frame_id = rospy.get_param("~imu_frame_id")
         self.right_cam_frame_id = rospy.get_param("~right_cam_frame_id")
         self.base_link_frame_id = rospy.get_param("~base_link_frame_id")
-
+        
         self.left_yaml_file = os.path.join(self.output_dir, "LeftCameraParams.yaml")
         self.right_yaml_file = os.path.join(self.output_dir, "RightCameraParams.yaml")
 

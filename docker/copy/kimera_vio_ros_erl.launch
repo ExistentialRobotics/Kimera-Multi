@@ -26,19 +26,19 @@
   <!-- Frame IDs. These DO NOT match frame id's on the video streams, as the
 	RealSense and Kimera publish conflicting Tf's -->
   <arg name="odom_frame_id"      value="odom"/>
-  <arg name="base_link_frame_id" value="jackal1/imu_base_link"/>
+  <arg name="base_link_frame_id" value="$(optenv ROBOT_NAMESPACE)/imu_base_link"/>
   <arg name="map_frame_id"       value="map"/>
-  <arg name="left_cam_frame_id"  value="jackal1/camera_infra2_frame"/>
-  <arg name="right_cam_frame_id" value="jackal1/camera_infra2_frame"/>
+  <arg name="left_cam_frame_id"  value="$(optenv ROBOT_NAMESPACE)/left_cam_frame"/>
+  <arg name="right_cam_frame_id" value="$(optenv ROBOT_NAMESPACE)/right_cam_frame"/>
 
   <!-- Subscribed Topics -->
-  <arg name="left_cam_topic"  value="/jackal1/camera/infra1/image_rect_raw"/>
-  <arg name="right_cam_topic" value="/jackal1/camera/infra2/image_rect_raw"/>
-  <arg name="imu_topic"       value="/jackal1/camera/imu"/>
+  <arg name="left_cam_topic"  value="/$(optenv ROBOT_NAMESPACE)/camera/infra1/image_rect_raw"/>
+  <arg name="right_cam_topic" value="/$(optenv ROBOT_NAMESPACE)/camera/infra2/image_rect_raw"/>
+  <arg name="imu_topic"       value="/$(optenv ROBOT_NAMESPACE)/camera/imu"/>
   
   <!-- External Odom -->
   <arg name="use_external_odom" value="true"/>
-  <arg name="external_odom_topic" value="/jackal1/jackal_velocity_controller/odom"/>
+  <arg name="external_odom_topic" value="/$(optenv ROBOT_NAMESPACE)/jackal_velocity_controller/odom"/>
 
   <!-- Launch actual pipeline -->
   <include file="$(find kimera_vio_ros)/launch/kimera_vio_ros.launch"
@@ -48,6 +48,7 @@
  <node pkg="tf" type="static_transform_publisher" name="velo_link_broadcaster"
    args="0 0 0 0 0 0 1 $(arg base_link_frame_id) velo_link 100"/>
 
- <node pkg="tf2_ros" type="static_transform_publisher" name="imu_to_base_broadcaster" args="0.01728 -0.195849 -0.19873 -0.5 -0.5 -0.5 0.5 $(arg base_link_frame_id) jackal1/base_link" />
+ <!-- since the imu is required to be the base_link_frame, add imu to your desired base link here. this is the transformation from the frame the imu readings are published in to the robot base link -->
+ <node pkg="tf2_ros" type="static_transform_publisher" name="imu_to_base_broadcaster" args="0.01728 -0.195849 -0.19873 -0.5 -0.5 -0.5 0.5 $(arg base_link_frame_id) $(optenv ROBOT_NAMESPACE)/base_link" />
  
 </launch>

@@ -15,4 +15,5 @@ DATASET_ROOT="/mnt/drive/Datasets/KimeraMulti_IROS23"
 docker run -it --rm --net=host \
   -v $(pwd)/volume:/root/volume \
   -v ${DATASET_ROOT}:/root/KimeraMulti_IROS23 \
+  -e ROBOT_NAMESPACE \
   kimera-multi-deploy
