@@ -68,8 +68,8 @@ WORKDIR ${WORKSPACE}
 RUN catkin init
 RUN catkin config -a --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGTSAM_TANGENT_PREINTEGRATION=OFF -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF -DOPENGV_BUILD_WITH_MARCH_NATIVE=OFF
 RUN catkin config --merge-devel
+RUN source $ROS_DIR/setup.bash && catkin build -c -s -j8 || true
 RUN source $ROS_DIR/setup.bash && catkin build -c -s -j8
-
 # Download vocabulary file
 WORKDIR ${WORKSPACE}/src/kimera_multi_lcd
 RUN pip install gdown
@@ -78,7 +78,11 @@ RUN apt install python-is-python3
 RUN gdown 'https://drive.google.com/uc?export=download&confirm=9iBg&id=1N4y0HbgA3PHQ73ZxFJvy5dgvV_0cTBYF'
 RUN unzip -f vocab.zip
 
-WORKDIR /root
+WORKDIR ${WORKSPACE}
+COPY "./copy/reliable-udp-comms" /root/catkin_ws/src/reliable-udp-comms
+RUN source $ROS_DIR/setup.bash && catkin build -c -s -j8
+
+WORKDIR /root 
 COPY "./copy/ERL" catkin_ws/src/kimera_vio/params/ERL
 COPY "./copy/cam_info_yamlizer.launch" catkin_ws/src/kimera_ros/launch/
 COPY "./copy/camera_info_yamlizer_node.py" catkin_ws/src/kimera_ros/scipts/
