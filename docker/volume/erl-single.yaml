@@ -1,0 +1,42 @@
+session_name: erl-kimera
+
+environment:
+  CATKIN_WS: /root/catkin_ws
+  LOG_DIR: /root/volume/log
+  RATE: "1.0"
+  NUM_ROBOTS: "2"
+  BOW_SKIP_NUM: "3"
+
+options:
+  default-command: /bin/bash
+
+windows:
+- window_name: frontend
+  layout: tiled  
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - mkdir -p $LOG_DIR/$ROBOT_NAME/distributed
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_distributed kimera_distributed.launch robot_id:=$ROBOT_ID robot_name:=$ROBOT_NAME num_robots:=$NUM_ROBOTS dataset_name:=Jackal log_output_path:=$LOG_DIR/$ROBOT_NAME/distributed
+
+- window_name: dpgo
+  layout: tiled
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_distributed dpgo.launch robot_id:=$ROBOT_ID robot_name:=$ROBOT_NAME num_robots:=$NUM_ROBOTS dataset_name:=Jackal multi_master:=true log_output_path:=$LOG_DIR/$ROBOT_NAME/distributed
+
+- window_name: vio
+  layout: tiled  
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_multi kimera_vio_jackal.launch robot_name:=$ROBOT_NAME robot_id:=$ROBOT_ID use_d455:=true multirobot:=true lcd_no_optimize:=false use_external_odom:=true 
+
+    

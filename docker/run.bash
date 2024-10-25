@@ -16,4 +16,6 @@ docker run -it --rm --net=host \
   -v $(pwd)/volume:/root/volume \
   -v ${DATASET_ROOT}:/root/KimeraMulti_IROS23 \
   -e ROBOT_NAMESPACE \
+  -e ROBOT_NAME \
+  -e ROBOT_ID \
   kimera-multi-deploy

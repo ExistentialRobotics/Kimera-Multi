@@ -1,0 +1,30 @@
+<launch>
+  <arg name="robot_name"  doc="Namespace of the platform producing sensor data." />
+  <arg name="robot_id"    doc="ID of the platform producing sensor data." />
+  <arg name="online"      default="true" />
+  <arg name="log_output"  default="false"/>
+  <arg name="verbosity"   default="0"/>
+
+  <!-- BoW vector publishing for Kimera-Multi -->
+  <arg name="bow_batch_size"          default="10" />
+  <arg name="bow_skip_num"            default="2" />
+  <arg name="publish_vlc_frames"      default="true"/>
+
+  <arg name="do_coarse_temporal_sync" default="false"/>
+  <arg name="do_fine_temporal_sync"   default="false"/>
+  <arg name="use_external_odom"       default="true"/>
+  <arg name="use_lcd"                 default="true"/>
+  <arg name="lcd_no_optimize"         default="false"/>
+  <arg name="lcd_no_detection"        default="false"/>
+
+  <!-- frame information -->
+  <arg name="map_frame_id"      value="$(arg robot_name)/map"/>
+  <arg name="odom_frame_id"        value="$(arg robot_name)/odom"/>
+
+  <!-- Launch actual pipeline -->
+  <group ns="$(arg robot_name)" >
+    <include file="$(find kimera_vio_ros)/launch/kimera_vio_ros_erl.launch"  pass_all_args="true"/>
+    
+  </group>  <!-- ns="$(arg robot_name)" -->
+
+</launch>

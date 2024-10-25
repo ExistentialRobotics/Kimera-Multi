@@ -1,0 +1,3 @@
+# Hosts (each specified by hostname and enet port) that have persistent communication across disconnections 
+- robot0: {hostname: "192.168.10.109", port: 11411}
+- robot1: {hostname: "192.168.10.144", port: 11411}

@@ -1,0 +1,59 @@
+session_name: erl-kimera-distributed
+
+environment:
+  CATKIN_WS: /root/catkin_ws
+  LOG_DIR: /root/volume/log
+  ROBOT0: "jackal1"
+  RATE: "1.0"
+  NUM_ROBOTS: "1"
+  BOW_SKIP_NUM: "3"
+
+options:
+  default-command: /bin/bash
+
+windows:
+- window_name: frontend
+  layout: tiled  
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - mkdir -p $LOG_DIR/$ROBOT0/distributed
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_distributed kimera_distributed.launch robot_id:=0 robot_name:=$ROBOT0 num_robots:=$NUM_ROBOTS dataset_name:=Jackal log_output_path:=$LOG_DIR/$ROBOT0/distributed
+
+- window_name: dpgo
+  layout: tiled
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_distributed dpgo.launch robot_id:=0 robot_name:=$ROBOT0 num_robots:=$NUM_ROBOTS dataset_name:=Jackal multi_master:=true log_output_path:=$LOG_DIR/$ROBOT0/distributed
+
+- window_name: vio
+  layout: tiled  
+  shell_command_before:
+    - source $CATKIN_WS/devel/setup.bash
+    - sleep 5;
+
+  panes:
+    - roslaunch kimera_multi kimera_vio_erl_jackal.launch robot_name:=$ROBOT0 robot_id:=0 use_d455:=true multirobot:=false lcd_no_optimize:=true use_external_odom:=true 
+    # - roslaunch kimera_multi kimera_vio_jackal.launch robot_name:=$ROBOT0 robot_id:=0 use_d455:=true multirobot:=true lcd_no_optimize:=true use_external_odom:=true
+
+# - window_name: data
+#   focus: true  
+#   layout: tiled  
+#   shell_command_before:
+#     - source $CATKIN_WS/devel/setup.bash
+
+#   panes:
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG0 input_ns:=$ROBOT0 output_ns:=$ROBOT0 rate:=$RATE
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG1 input_ns:=$ROBOT1 output_ns:=$ROBOT1 rate:=$RATE
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG2 input_ns:=$ROBOT2 output_ns:=$ROBOT2 rate:=$RATE
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG3 input_ns:=$ROBOT3 output_ns:=$ROBOT3 rate:=$RATE
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG4 input_ns:=$ROBOT4 output_ns:=$ROBOT4 rate:=$RATE
+#     - sleep 15; roslaunch kimera_distributed mit_rosbag.launch bagfile:=$ROSBAG5 input_ns:=$ROBOT5 output_ns:=$ROBOT5 rate:=$RATE
+#     - sleep 15; rviz -d $(rospack find kimera_distributed)/rviz/single_machine.rviz
+#     - roscore
+#     - rosnode kill -a
