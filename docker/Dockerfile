@@ -89,6 +89,6 @@ COPY "./copy/camera_info_yamlizer_node.py" catkin_ws/src/kimera_ros/scipts/
 COPY "./copy/kimera_vio_ros_erl.launch" catkin_ws/src/kimera_ros/launch/
 COPY "./copy/robot_names.yaml" catkin_ws/src/kimera_distributed/params/
 COPY "./copy/persistent_hosts.yaml" catkin_ws/src/kimera_distributed/params/
-COPY "./copy/kimera_vio_jackal.launch" catkin_ws/src/Kimera-multi/launch/
+COPY "./copy/kimera_vio_jackal.launch" catkin_ws/src/Kimera-Multi/launch/
 COPY "./copy/entrypoint.bash" /
 ENTRYPOINT ["/entrypoint.bash"]
